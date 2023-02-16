@@ -1,0 +1,124 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/css/blogcss.css" />
+  <%- include('../views/partials/links'); %>
+
+</head>
+
+<body>
+
+  <!-- header part -->
+
+  <nav class="navbar navbar-expand-lg bg-danger navbar-light">
+    <div class="container mt-1">
+      <h2 class="text-white">Scribe Tribe</h2>
+      <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapsenavbar">
+        <span class="navbar-toggler-icon "></span>
+      </button>
+  
+      <div class="collapse navbar-collapse text-center" id="collapsenavbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item px-2">
+            <a href="/exam" class="nav-link text-white"> VIEW EXAMS </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/logout" class="nav-link text-white"> LOGOUT </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+      <% function formatDate(dateObject) { let d=new Date(dateObject); let day=d.getDate(); let month=d.getMonth() + 1; let
+        year=d.getFullYear(); if (day < 10) { day="0" + day; } if (month < 10) { month="0" + month; } let date=year + "-" +
+        month + "-" + day; return date; };%>
+
+  <!-- page content -->
+
+  <div class="container mt-3">
+    <div class="d-flex justify-content-center">
+      <form class="col-md-6" id="profile" action="/profileVolunteer" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label for="username">Name</label>
+          <input type="text" class="form-control" id="username" name="username" value="<%= users.username %>" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone No</label>
+          <input type="text" class="form-control" id="phone" name="phone" value="<%= users.phone %>" disabled>
+        </div>
+
+        <div class="row mx-md-n2">
+          <div class="col px-md-2">
+            <label for="gender">Gender</label>
+            <input type="text" class="form-control" id="gender" name="gender" value="<%= users.gender %>" disabled>
+          </div>
+          <div class="col px-2">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age" name="age" value="<%= users.age %>" disabled>
+          </div>
+        </div>
+
+        <div class="row mx-md-n2">
+          <div class="col px-md-2">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="city" value="<%= users.city %>" disabled>
+          </div>
+          <div class="col px-2">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state" name="state" value="<%= users.state %>" disabled>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="language">Language</label>
+          <input type="text" class="form-control" id="language" name="language" value="<%= users.language %>" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="qualification">Qualification</label>
+          <input type="text" class="form-control" id="qualification" name="qualification"
+            value="<%= users.qualification %>" disabled>
+        </div>
+
+    </div>
+    </form>
+  </div>
+
+        <div class="main-wrapper mt-0">
+          <div class="container main-container">
+            <% exams.forEach(exam=> { %>
+              <% if(exam.text !== ' ') { %>
+              <div class="row main-row mt-4">
+                <div class="col-12 align-center">
+                  <div class="row p-3">
+                    <div class="col-12 align-middle">
+        
+                      <h5>
+                        <%= formatDate(exam.date) %>
+                      </h5>
+                      Student Name : <%= exam.studentId.username %> <br><br>
+                        <%= exam.text %><br><br>
+        
+                    </div>
+        
+                  </div>
+        
+                </div>
+              </div>
+            <% } %>
+  
+          <% }) %>
+        </div>
+        </div>
+
+  <!-- <%- include('../views/partials/footer'); %> -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+</body>
+
+</html>
